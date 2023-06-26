@@ -1,4 +1,4 @@
-package org.example.main;
+package org.generator.main;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,13 +21,23 @@ class RandomGeneratorTest {
     }
 
     @Test
+    void testForNullArrays() {
+        assertThrows(RuntimeException.class, () -> new RandomGenerator(null, null));
+    }
+
+    @Test
+    void testForNegativeProbabilities() {
+        assertThrows(RuntimeException.class, () -> new RandomGenerator(new int[] {1, 2}, new float[] {0.5f, -0.5f}));
+    }
+
+    @Test
     void testNextNumResults(){
         int[] numbers = {1, 2, 3, 4, 5};
         float[] probabilities = {0.05f, 0.15f, 0.3f, 0.2f, 0.3f};
 
         var generator = new RandomGenerator(numbers, probabilities);
 
-        int tries = 10000;
+        int tries = 100000;
         Map<Integer, Integer> results = new HashMap<>();
 
         for (int i = 0; i < tries; i++) {
@@ -36,10 +46,11 @@ class RandomGeneratorTest {
         }
         for (int i = 0; i < numbers.length; i++) {
             int appearances = results.getOrDefault(numbers[i], 0);
-            // here I get the number from the normalized probabilities
-            assertTrue(Math.abs(appearances - (tries * generator.getProbabilities()[i])) / tries <= 0.3);
+            // here I get the float number from the normalized probabilities
+            assertTrue((Math.abs(appearances - (tries * generator.getProbabilities()[i])) / tries) <= 0.03);
 
         }
+
 
 
 

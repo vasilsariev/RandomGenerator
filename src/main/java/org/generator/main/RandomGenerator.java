@@ -1,13 +1,13 @@
-package org.example.main;
+package org.generator.main;
 
 import java.util.Random;
 
 public class RandomGenerator {
     // Values that may be returned by nextNum();
-    private int[] randomNums;
+    private final int[] randomNums;
 
     // Probability of the occurrence of randomNums;
-    private float[] probabilities;
+    private final float[] probabilities;
 
     public final Random random;
 
@@ -15,10 +15,8 @@ public class RandomGenerator {
         this.randomNums = randomNums;
         this.probabilities = probabilities;
         this.random = new Random();
+        checkArrays(randomNums, probabilities);
 
-        if(randomNums.length != probabilities.length) {
-            throw new RuntimeException("Both arrays should have the same length");
-        }
         normalizeProbabilities();
     }
 
@@ -42,6 +40,9 @@ public class RandomGenerator {
         for (float number : probabilities) {
             sum += number;
         }
+        if(sum == 1) {
+            return;
+        }
 
         //assigning their new value;
         for (int i = 0; i < probabilities.length; i++) {
@@ -51,5 +52,17 @@ public class RandomGenerator {
 
     public float[] getProbabilities() {
         return probabilities;
+    }
+
+    private void checkArrays(int[] nums, float[] probabilities){
+        if(nums == null || probabilities == null) {
+            throw new RuntimeException("Arrays can't be empty");
+        }
+        if(!Util.noNegativeFloatNumbers(probabilities)) {
+            throw new RuntimeException("No negative numbers allowed in the probabilities arrays");
+        }
+        if(nums.length != probabilities.length) {
+            throw new RuntimeException("Both arrays should have the same length");
+        }
     }
 }

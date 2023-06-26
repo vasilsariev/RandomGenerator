@@ -1,4 +1,4 @@
-package org.example.main;
+package org.generator.main;
 
 import java.util.Scanner;
 
@@ -6,7 +6,7 @@ public class Util {
     private final static String REGEX_LIST_INT = "^(\\d+(, \\d+)*)$";
     private final static String REGEX_LIST_FLOAT = "^(\\d+(\\.\\d+)?(, \\d+(\\.\\d+)?)*,?)$";
 
-    private final static String WARNING_FLOAT_LIST = "You should enter only float numbers divided by ', '(comma and space). CAN'T BE EMPTY ";
+    private final static String WARNING_FLOAT_LIST = "You should enter only float numbers divided by ', '(comma and space). CAN'T BE EMPTY. Only positive numbers allowed ";
     private final static String INSTRUCTIONS_FLOAT_LIST = "Enter a list of float numbers divided by ', '(comma and space). Every number should correspond to an integer from the first list";
 
     private final static String WARNING_INT_LIST = "You should enter only whole numbers divided by ', '(comma and space). CAN'T BE EMPTY ";
@@ -52,9 +52,13 @@ public class Util {
         return floatArray;
     }
 
-
-
-
-
+    public static boolean noNegativeFloatNumbers(float[] floatArr) {
+        for(float number : floatArr){
+            if(number < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }

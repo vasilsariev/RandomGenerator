@@ -1,11 +1,12 @@
-package org.example;
+package org.generator;
 
-import org.example.main.RandomGenerator;
-import org.example.main.Util;
+import org.generator.main.RandomGenerator;
+import org.generator.main.Util;
 
 
 import java.util.HashMap;
 import java.util.Map;
+
 
 
 public class Demo {
@@ -13,6 +14,8 @@ public class Demo {
 
         int[] numsArray = Util.askUserForIntArray();
         float[] probabilities = Util.askUserForFloatArray();
+
+
 
         RandomGenerator generator = new RandomGenerator(numsArray, probabilities);
 
