@@ -2,9 +2,14 @@ package org.generator.main;
 
 import java.util.Scanner;
 
+//Helper class for handling user input and parsing
 public class Util {
+
+    // Regular expressions for validating input format
     private final static String REGEX_LIST_INT = "^(\\d+(, \\d+)*)$";
     private final static String REGEX_LIST_FLOAT = "^(\\d+(\\.\\d+)?(, \\d+(\\.\\d+)?)*,?)$";
+
+    // Warning and instruction messages for user
 
     private final static String WARNING_FLOAT_LIST = "You should enter only float numbers divided by ', '(comma and space). CAN'T BE EMPTY. Only positive numbers allowed ";
     private final static String INSTRUCTIONS_FLOAT_LIST = "Enter a list of float numbers divided by ', '(comma and space). Every number should correspond to an integer from the first list";
@@ -52,6 +57,7 @@ public class Util {
         return floatArray;
     }
 
+    // Checks that all floats in an array are non-negative
     public static boolean noNegativeFloatNumbers(float[] floatArr) {
         for(float number : floatArr){
             if(number < 0) {

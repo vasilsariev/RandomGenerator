@@ -30,9 +30,11 @@ public class RandomGenerator {
             }
 
         }
+        // Default return if no match (should not be reached due to normalized probabilities)
         return randomNums[randomNums.length - 1];
     }
 
+    // Normalizes the probabilities so they sum up to 1
     private void normalizeProbabilities() {
         float sum = 0.0f;
 
